@@ -1,0 +1,8 @@
+{
+  "name": "Nordvpn Status",
+  "description": "Display status, and control from menu",
+  "uuid": "nordvpnstatus@patrick.ziajski.org",
+  "shell-version": [
+    "40"
+  ]
+}
