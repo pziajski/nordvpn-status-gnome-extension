@@ -23,6 +23,7 @@ const GETTEXT_DOMAIN = 'my-indicator-extension';
 
 const { GObject, St, GLib } = imports.gi;
 
+// deals with text translations
 const Gettext = imports.gettext.domain(GETTEXT_DOMAIN);
 const _ = Gettext.gettext;
 
@@ -42,7 +43,9 @@ function setConnectionStatus() {
     var [ok, out, err, exit] = GLib.spawn_command_line_sync('nordvpn status');
     const bytesToString = String.fromCharCode(...out);
     let statusString = bytesToString.split('\n')[0].split(': ')[1];
-    connectionStatus.set_text(statusString);
+    if (connectionStatus.get_text() !== statusString) {
+        connectionStatus.set_text(statusString);
+    }
     return true;
 }
 
