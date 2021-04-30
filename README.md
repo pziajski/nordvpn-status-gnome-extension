@@ -2,7 +2,9 @@
 
 Custom gnome extension to display nordvpn connection status, details, and overall control.
 
-This is my first gnome extension is will be a learning template, so let me know what you think I should change and why if there is a better way of doing something.
+This is my first gnome extension and will basically be how i'm learning to make gnome extensions, so let me know what you think I should change and why if there is a better way of doing something.
+
+I decided to make this because this is something I want to have, all other extensions are out-of-date and/or dont look how I want, and I wanted to give making extensions a try.
 
 ## Instalation
 
