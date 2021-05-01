@@ -18,8 +18,7 @@
 
 /* exported init */
 
-// TODO what does text domain mean???
-const GETTEXT_DOMAIN = 'my-indicator-extension';
+const GETTEXT_DOMAIN = 'nordvpn-status';
 
 const { Clutter, GObject, St, GLib } = imports.gi;
 
@@ -93,13 +92,12 @@ class Extension {
     enable() {
         extensionLog("enabling...");
         this._indicator = new Indicator();
-        Main.panel.addToStatusArea(this._uuid, this._indicator, -1, 'center'); // TODO change to set dynamically
-        timeout = Mainloop.timeout_add_seconds(1.0, setConnectionStatus);
+        Main.panel.addToStatusArea(this._uuid, this._indicator, -1, 'center');
+        // TODO ^ change to set dynamically
     }
 
     disable() {
         extensionLog("disabling...");
-        Mainloop.source_remove(timeout);
         this._indicator.destroy();
         this._indicator = null;
     }
