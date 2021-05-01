@@ -61,17 +61,16 @@ class Indicator extends PanelMenu.Button {
             y_align: Clutter.ActorAlign.CENTER
         })
 
-        // display icon in statusbar
         this.add_child(connectionStatus);
 
-        let connect = new PopupMenu.PopupMenuItem(_('Connect'));
+        // let connect = new PopupMenu.PopupMenuItem(_('Connect'));
         // item.connect('activate', () => {
         //     Main.notify(_('Whatʼs up, folks?'));
         // });
-        this.menu.addMenuItem(connect);
+        // this.menu.addMenuItem(connect);
 
-        let disconnect = new PopupMenu.PopupMenuItem(_('Disconnect'));
-        this.menu.addMenuItem(disconnect);
+        // let disconnect = new PopupMenu.PopupMenuItem(_('Disconnect'));
+        // this.menu.addMenuItem(disconnect);
 
         // setConnectionStatus();
         extensionLog("initialize complete");
