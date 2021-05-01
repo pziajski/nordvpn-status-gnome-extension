@@ -21,7 +21,7 @@
 // TODO what does text domain mean???
 const GETTEXT_DOMAIN = 'my-indicator-extension';
 
-const { GObject, St, GLib } = imports.gi;
+const { Clutter, GObject, St, GLib } = imports.gi;
 
 // deals with text translations
 const Gettext = imports.gettext.domain(GETTEXT_DOMAIN);
