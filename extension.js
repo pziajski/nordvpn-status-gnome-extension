@@ -81,7 +81,6 @@ class Indicator extends PanelMenu.Button {
 class Extension {
     constructor(uuid) {
         this._uuid = uuid;
-
         ExtensionUtils.initTranslations(GETTEXT_DOMAIN);
     }
 
