@@ -57,7 +57,8 @@ class Indicator extends PanelMenu.Button {
         
         connectionStatus = new St.Label({
             style_class: "connectionStatusText",
-            text: "Loading..."
+            text: "Loading...",
+            y_align: Clutter.ActorAlign.CENTER
         })
 
         // display icon in statusbar
