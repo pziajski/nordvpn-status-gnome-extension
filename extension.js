@@ -88,7 +88,7 @@ class Extension {
     enable() {
         extensionLog("enabling...");
         this._indicator = new Indicator();
-        Main.panel.addToStatusArea(this._uuid, this._indicator);
+        Main.panel.addToStatusArea(this._uuid, this._indicator, -1, 'center'); // TODO change to set dynamically
         timeout = Mainloop.timeout_add_seconds(1.0, setConnectionStatus);
     }
 
