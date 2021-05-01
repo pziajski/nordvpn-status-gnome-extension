@@ -33,35 +33,24 @@ const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 
-let connectionStatus, timeout;
-
 function extensionLog(message) {
     log("[Nordvpn Status] " + message);
 }
 
-function setConnectionStatus() {
-    var [ok, out, err, exit] = GLib.spawn_command_line_sync('nordvpn status');
-    const bytesToString = String.fromCharCode(...out);
-    let statusString = bytesToString.split('\n')[0].split(': ')[1];
-    if (connectionStatus.get_text() !== statusString) {
-        connectionStatus.set_text(statusString);
-    }
-    return true;
-}
-
 const Indicator = GObject.registerClass(
 class Indicator extends PanelMenu.Button {
+    _connectionStatus;
+
     _init() {
-        // TODO my shiny indicator? what?
-        super._init(0.0, _('My Shiny Indicator'));
+        super._init(0.0, _('Nordvpn Status'));
         
-        connectionStatus = new St.Label({
+        this._connectionStatus = new St.Label({
             style_class: "connectionStatusText",
             text: "Loading...",
             y_align: Clutter.ActorAlign.CENTER
         })
 
-        this.add_child(connectionStatus);
+        this.add_child(this._connectionStatus);
 
         // let connect = new PopupMenu.PopupMenuItem(_('Connect'));
         // item.connect('activate', () => {
@@ -72,8 +61,26 @@ class Indicator extends PanelMenu.Button {
         // let disconnect = new PopupMenu.PopupMenuItem(_('Disconnect'));
         // this.menu.addMenuItem(disconnect);
 
-        // setConnectionStatus();
+        this._getStatustimeout = Mainloop.timeout_add_seconds(1.0, () => this._updateConnectionStatus());
         extensionLog("initialize complete");
+    }
+
+    _updateConnectionStatus() {
+        var [_ok, out, _err, _exit] = GLib.spawn_command_line_sync('nordvpn status');
+        
+        // convert ByteArray to String to get certain lines easier
+        const bytesToString = String.fromCharCode(...out);
+
+        // get only connection status
+        const statusString = bytesToString.split('\n')[0].split(': ')[1];
+        if (this._connectionStatus.get_text() !== statusString) {
+            this._connectionStatus.set_text(statusString);
+        }
+        return true;
+    }
+
+    destroy() {
+        Mainloop.source_remove(this._getStatustimeout);
     }
 });
 
