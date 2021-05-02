@@ -18,30 +18,28 @@
 
 /* exported init */
 
-const GETTEXT_DOMAIN = 'nordvpn-status';
-
 const { Clutter, GObject, St, GLib } = imports.gi;
 
-// deals with text translations
-const Gettext = imports.gettext.domain(GETTEXT_DOMAIN);
-const _ = Gettext.gettext;
-
-const ExtensionUtils = imports.misc.extensionUtils;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me = ExtensionUtils.getCurrentExtension();
+const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
+const _ = Gettext.gettext;
+
 function extensionLog(message) {
     log("[Nordvpn Status] " + message);
 }
 
-const Indicator = GObject.registerClass(
-class Indicator extends PanelMenu.Button {
+const NordvpnStatus = GObject.registerClass(
+class NordvpnStatus extends PanelMenu.Button {
     _connectionStatus;
 
     _init() {
-        super._init(0.0, _('Nordvpn Status'));
+        super._init(0.0, _('NordvpnStatus'));
         
         this._connectionStatus = new St.Label({
             style_class: "connectionStatusText",
