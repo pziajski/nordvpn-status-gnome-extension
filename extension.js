@@ -76,7 +76,7 @@ class NordvpnStatus extends PanelMenu.Button {
         return true;
     }
 
-    destroy() {
+    destroy = () => {
         Mainloop.source_remove(this._getStatustimeout);
     }
 });
