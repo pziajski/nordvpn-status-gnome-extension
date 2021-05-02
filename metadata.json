@@ -1,8 +1,10 @@
 {
   "name": "Nordvpn Status",
   "description": "Display status, and control from menu",
+  "gettext-domain": "nordvpnstatus",
   "uuid": "nordvpnstatus@patrick.ziajski.org",
   "shell-version": [
     "40"
-  ]
+  ],
+  "url": "https://github.com/pziajski/nordvpn-status-gnome-extension"
 }
