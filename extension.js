@@ -89,15 +89,15 @@ class Extension {
 
     enable() {
         extensionLog("enabling...");
-        this._indicator = new Indicator();
-        Main.panel.addToStatusArea(this._uuid, this._indicator, -1, 'center');
+        this._nordvpnStatus = new NordvpnStatus();
+        Main.panel.addToStatusArea(this._uuid, this._nordvpnStatus, -1, 'center');
         // TODO ^ change to set dynamically
     }
 
     disable() {
         extensionLog("disabling...");
-        this._indicator.destroy();
-        this._indicator = null;
+        this._nordvpnStatus.destroy();
+        this._nordvpnStatus = null;
     }
 }
 
