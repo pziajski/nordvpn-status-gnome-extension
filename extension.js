@@ -7,7 +7,7 @@ const PopupMenu = imports.ui.popupMenu;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
+const Gettext = imports.gettext.domain(Me.metadata["gettext-domain"]);
 const _ = Gettext.gettext;
 
 function extensionLog(message) {
@@ -19,7 +19,7 @@ class NordvpnStatus extends PanelMenu.Button {
     _connectionStatus;
 
     _init() {
-        super._init(0.0, _('NordvpnStatus'));
+        super._init(0.0, _("NordvpnStatus"));
         
         this._connectionStatus = new St.Label({
             style_class: "connectionStatusText",
@@ -69,13 +69,13 @@ class NordvpnStatus extends PanelMenu.Button {
 class Extension {
     constructor(uuid) {
         this._uuid = uuid;
-        ExtensionUtils.initTranslations(Me.metadata['gettext-domain']);
+        ExtensionUtils.initTranslations(Me.metadata["gettext-domain"]);
     }
 
     enable() {
         extensionLog("enabling...");
         this._nordvpnStatus = new NordvpnStatus();
-        Main.panel.addToStatusArea(this._uuid, this._nordvpnStatus, -1, 'center');
+        Main.panel.addToStatusArea(this._uuid, this._nordvpnStatus, -1, "center");
         // TODO ^ change to set dynamically
     }
 
