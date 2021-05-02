@@ -49,15 +49,6 @@ class NordvpnStatus extends PanelMenu.Button {
 
         this.add_child(this._connectionStatus);
 
-        // let connect = new PopupMenu.PopupMenuItem(_('Connect'));
-        // item.connect('activate', () => {
-        //     Main.notify(_('Whatʼs up, folks?'));
-        // });
-        // this.menu.addMenuItem(connect);
-
-        // let disconnect = new PopupMenu.PopupMenuItem(_('Disconnect'));
-        // this.menu.addMenuItem(disconnect);
-
         this._getStatustimeout = Mainloop.timeout_add_seconds(1.0, () => this._updateConnectionStatus());
         extensionLog("initialize complete");
     }
