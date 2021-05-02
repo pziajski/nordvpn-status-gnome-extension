@@ -84,7 +84,7 @@ class NordvpnStatus extends PanelMenu.Button {
 class Extension {
     constructor(uuid) {
         this._uuid = uuid;
-        ExtensionUtils.initTranslations(GETTEXT_DOMAIN);
+        ExtensionUtils.initTranslations(Me.metadata['gettext-domain']);
     }
 
     enable() {
