@@ -36,28 +36,22 @@ class NordvpnStatus extends PanelMenu.Button {
     }
 
     _updateConnectionStatus() {
-        var [_ok, out, _err, _exit] = GLib.spawn_command_line_sync('nordvpn status');
+        var [_ok, out, _err, _exit] = GLib.spawn_command_line_sync("nordvpn status");
         
         // convert ByteArray to String to get certain lines easier
         const bytesToString = String.fromCharCode(...out);
 
-        const statusData = bytesToString.split('\n');
-        const connectionStatus = statusData[0].split(': ')[1];
-        switch (connectionStatus) {
-            case 'Disconnected':
-                if (this._connectionStatus.get_text() !== connectionStatus) {
-                    this._connectionStatus.set_text(connectionStatus);
-                }
-                break;
-            case 'Connected':
-                const server = statusData[1].split(': ')[1];
-                if (this._connectionStatus.get_text() !== server) {
-                    this._connectionStatus.set_text(server);
-                }
-                break;
-            default:
-                this._connectionStatus.set_text('Updating...');
-                break;
+        const statusData = bytesToString.split("\n");
+        const connectionStatus = statusData[0].split(": ")[1];
+        if (connectionStatus === "Disconnected" || connectionStatus === "Connecting") {
+            if (this._connectionStatus.get_text() !== connectionStatus) {
+                this._connectionStatus.set_text(connectionStatus);
+            }
+        } else if (connectionStatus === "Connected") {
+            const server = statusData[1].split(": ")[1];
+            if (this._connectionStatus.get_text() !== server) {
+                this._connectionStatus.set_text(server);
+            }
         }
 
         return true;
