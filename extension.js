@@ -59,11 +59,25 @@ class NordvpnStatus extends PanelMenu.Button {
         // convert ByteArray to String to get certain lines easier
         const bytesToString = String.fromCharCode(...out);
 
-        // get only connection status
-        const statusString = bytesToString.split('\n')[0].split(': ')[1];
-        if (this._connectionStatus.get_text() !== statusString) {
-            this._connectionStatus.set_text(statusString);
+        const statusData = bytesToString.split('\n');
+        const connectionStatus = statusData[0].split(': ')[1];
+        switch (connectionStatus) {
+            case 'Disconnected':
+                if (this._connectionStatus.get_text() !== connectionStatus) {
+                    this._connectionStatus.set_text(connectionStatus);
+                }
+                break;
+            case 'Connected':
+                const server = statusData[1].split(': ')[1];
+                if (this._connectionStatus.get_text() !== server) {
+                    this._connectionStatus.set_text(server);
+                }
+                break;
+            default:
+                this._connectionStatus.set_text('Updating...');
+                break;
         }
+
         return true;
     }
 
