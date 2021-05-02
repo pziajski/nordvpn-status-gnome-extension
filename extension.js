@@ -10,6 +10,8 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain(Me.metadata["gettext-domain"]);
 const _ = Gettext.gettext;
 
+const NORDVPN_SERVER_LIST_API = "https://api.nordvpn.com/server";
+
 function extensionLog(message) {
     log("[Nordvpn Status] " + message);
 }
