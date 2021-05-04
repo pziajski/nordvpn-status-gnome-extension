@@ -37,7 +37,7 @@ class NordvpnStatus extends PanelMenu.Button {
 
     _updateConnectionStatus() {
         var [_ok, out, _err, _exit] = GLib.spawn_command_line_sync("nordvpn status");
-        
+         
         // convert ByteArray to String to get certain lines easier
         const bytesToString = String.fromCharCode(...out);
 
