@@ -48,9 +48,15 @@ class NordvpnStatus extends PanelMenu.Button {
                 this._connectionStatus.set_text(connectionStatus);
             }
         } else if (connectionStatus === "Connected") {
-            const server = statusData[1].split(": ")[1];
-            if (this._connectionStatus.get_text() !== server) {
-                this._connectionStatus.set_text(server);
+            const server = statusData[1].split(": ")[1].split(".")[0].split("").map(element => {
+                if (parseInt(element) >= 0) {
+                    return element;
+                }
+            }).join("");
+            const connectionCountry = statusData[2].split(": ")[1].toUpperCase();
+            const customInfo = `${connectionCountry} #${server}`;
+            if (this._connectionStatus.get_text() !== customInfo) {
+                this._connectionStatus.set_text(customInfo);
             }
         }
 
